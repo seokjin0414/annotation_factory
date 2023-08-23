@@ -30,7 +30,8 @@ public class MagicMojaProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(Magic.class); for (Element element : elements) {
+        Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(Magic.class);
+        for (Element element : elements) {
             Name elementName = element.getSimpleName(); if (element.getKind() != ElementKind.INTERFACE) {
                 processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Magic annotation can not be used on " + elementName);
             } else {
@@ -47,7 +48,8 @@ public class MagicMojaProcessor extends AbstractProcessor {
                     .build();
 
             TypeSpec magicMoja = TypeSpec.classBuilder("MagicMoja")
-                    .addModifiers(Modifier.PUBLIC) .addSuperinterface(className)
+                    .addModifiers(Modifier.PUBLIC)
+                    .addSuperinterface(className)
                     .addMethod(pullOut)
                     .build();
 
